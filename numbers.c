@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include "array.h"
+#include "array_void.h"
 
 int square(int number){
   return number * number;
@@ -19,8 +20,37 @@ void display_array(Array_ptr array){
   for (int index = 0; index < array->length; index++)
   {
     printf("%d ", array->array[index]);
-  }
-  
+  } 
+  printf("\n");
+}
+
+//-----Object related functions ------
+
+Object square_void(Object object){
+  long int number = (long int )object;
+  Object result = (Object)(number * number);
+  return result;
+}
+
+Bool is_even_void(Object object){
+  int number = (long int) object;
+  if (number % 2 == 0) return True;
+  return False;
+}
+
+Object add_void(Object object1, Object object2 ){
+  long int number1 = (long int) object1;
+  long int number2 = (long int) object2;
+  Object result = (Object)(number1 + number2);
+  return result;
+}
+
+void display_number_array_void(ArrayVoid_ptr array){
+  for (int index = 0; index < array->length; index++)
+  {
+    printf("%d ", (int) array->array[index]);
+  } 
+  printf("\n");
 }
 
 int main(void){
@@ -31,16 +61,27 @@ int main(void){
   printf("List :\n");
   display_array(array); 
 
-  Array_ptr result = map( array, &square);
-  printf("\nResult from mapping(square) : \n");
-  display_array(result); 
+  printf("Result from mapping(square) : \n");
+  display_array(map( array, &square)); 
 
-  result = filter(array, &is_even);
-  printf("\nResult from filter(is_even) : \n");
-  display_array(result); 
+  printf("Result from filter(is_even) : \n");
+  display_array(filter(array, &is_even)); 
 
-  printf("\nResult from reducer(add) : \n");
+  printf("Result from reducer(add) : \n");
   printf("%d", reduce(array, 0, &add));
+
+  printf("\n\n---------void---------\n");
+
+  ArrayVoid_ptr array_void = create_array_void(5);
+  array_void->array[0] = (Object) + 1;
+  array_void->array[1] = (Object) + 2;
+  array_void->array[2] = (Object) + 3;
+  array_void->array[3] = (Object) + 4;
+  array_void->array[4] = (Object) + 5;
+
+  display_number_array_void(array_void);
+  printf("Result from mapping(square) : \n");
+  display_number_array_void(map_void( array_void, &square_void)); 
 
   return 0;
 }
