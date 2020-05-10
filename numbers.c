@@ -85,5 +85,8 @@ int main(void){
   printf("Result from filter(is_even) : \n");
   display_number_array_void(filter_void(array_void, &is_even_void));
 
+  printf("Result from reducer(add) : \n");
+  printf("%d\n", (int )reduce_void(array_void, 0, &add_void));
+
   return 0;
 }

@@ -36,3 +36,12 @@ ArrayVoid_ptr filter_void(ArrayVoid_ptr src, PredicateVoid predicate){
   }
   return filtered_array;
 }
+
+Object reduce_void(ArrayVoid_ptr src, Object init, ReducerVoid reducer){
+  Object context = init;
+  for(int index = 0; index < src->length; index++ )
+  {
+    context =  (*reducer)(src->array[index], context);
+  }
+  return context;
+}
