@@ -79,9 +79,11 @@ int main(void){
   array_void->array[3] = (Object) + 4;
   array_void->array[4] = (Object) + 5;
 
-  display_number_array_void(array_void);
   printf("Result from mapping(square) : \n");
   display_number_array_void(map_void( array_void, &square_void)); 
+
+  printf("Result from filter(is_even) : \n");
+  display_number_array_void(filter_void(array_void, &is_even_void));
 
   return 0;
 }
